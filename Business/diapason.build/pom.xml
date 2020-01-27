@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>it.bnl.fwk.jrfcore</groupId>
+		<artifactId>archetype-starter-parent</artifactId>
+		<version>1.2.12</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>it.bnl.mon.a6.busin</groupId>
+	<artifactId>diapason.build</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Diapason 2.0 - Build</name>
+
+	<properties>
+		<!-- MANDATORY - do not edit -->
+		<release.base.dir>${project.build.directory}/_release</release.base.dir>
+		<wsclient.module.dir>../diapason.wsclient</wsclient.module.dir>
+		<service.module.dir>../diapason.service</service.module.dir>
+		<ear.module.dir>../diapason.ear</ear.module.dir>
+		<!-- MANDATORY - do not edit -->
+	</properties>
+
+	<modules>
+		<!-- INIZIO MODULI UTENTE -->
+
+		<!-- FINE MODULI UTENTE -->
+		<module>${wsclient.module.dir}</module>
+		<module>${service.module.dir}</module>
+		<module>${ear.module.dir}</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>bnl</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.6</version>
+						<configuration>
+							<includeEmptyDirs>true</includeEmptyDirs>
+						</configuration>
+						<executions>
+							<execution>
+								<id>JRF-COPY-ENVIRONMENTS</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${release.base.dir}/environments-config/</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.basedir}/src/main/resources/env/</directory>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+							<execution>
+								<id>JRF-COPY-EAR</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${release.base.dir}/ear</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${ear.module.dir}/target/</directory>
+											<includes>
+												<include>*.ear</include>
+											</includes>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.google.code.maven-replacer-plugin</groupId>
+						<artifactId>replacer</artifactId>
+						<version>1.5.3</version>
+						<executions>
+							<execution>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>replace</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<filesToInclude>${release.base.dir}/environments-config/**/logback.xml</filesToInclude>
+							<replacements>
+								<replacement>
+									<token>prj.artifactId</token>
+									<value>${project.artifactId}</value>
+								</replacement>
+								<replacement>
+									<token>prj.version</token>
+									<value>${project.version}</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<!-- PROFILE FOR NEW DEVOPS PLATFORM BASED ON GIT -->
+		<profile>
+			<id>devops</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.6</version>
+						<configuration>
+							<includeEmptyDirs>true</includeEmptyDirs>
+						</configuration>
+						<executions>
+							<execution>
+								<id>JRF-COPY-ENVIRONMENTS</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${release.base.dir}/environments-config/</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.basedir}/src/main/resources/env/</directory>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+							<execution>
+								<id>JRF-COPY-EAR</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${release.base.dir}/ear</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${ear.module.dir}/target/</directory>
+											<includes>
+												<include>*.ear</include>
+											</includes>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.google.code.maven-replacer-plugin</groupId>
+						<artifactId>replacer</artifactId>
+						<version>1.5.3</version>
+						<executions>
+							<execution>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>replace</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<filesToInclude>${release.base.dir}/environments-config/**/logback.xml</filesToInclude>
+							<replacements>
+								<replacement>
+									<token>prj.artifactId</token>
+									<value>${project.artifactId}</value>
+								</replacement>
+								<replacement>
+									<token>prj.version</token>
+									<value>${project.version}</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		
+	</profiles>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/diapason.iml" filepath="$PROJECT_DIR$/diapason.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Business/diapason.build/diapason.build.iml" filepath="$PROJECT_DIR$/Business/diapason.build/diapason.build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Business/diapason.ear/diapason.ear.iml" filepath="$PROJECT_DIR$/Business/diapason.ear/diapason.ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Business/diapason.service/diapason.service.iml" filepath="$PROJECT_DIR$/Business/diapason.service/diapason.service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Business/diapason.wsclient/diapason.wsclient.iml" filepath="$PROJECT_DIR$/Business/diapason.wsclient/diapason.wsclient.iml" />
+    </modules>
+  </component>
+</project>

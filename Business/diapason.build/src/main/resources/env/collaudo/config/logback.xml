@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<!-- LOGNEXT MANDATORY PROPERTIES //START -->
+	<property scope="context" name="lognext.componentName" value="prj.artifactId" /> <!-- NON CAMBIARE MAI A MANO, E' VALORIZZATO DA JENKINS DURANTE IL PROCESSO DI BUILD -->
+	<property scope="context" name="lognext.componentVersion" value="prj.version" /> <!-- NON CAMBIARE MAI A MANO, E' VALORIZZATO DA JENKINS DURANTE IL PROCESSO DI BUILD -->
+	<property scope="context" name="lognext.componentType" value="JRF" />
+	<property scope="context" name="lognext.siglaservizio" value="A6" />
+	<property scope="context" name="lognext.env" value="COLL" />
+	<!-- LOGNEXT MANDATORY PROPERTIES //END -->
+	
+	<!-- il logging path punta alla ${jrfcore.root.folder} -->
+	<define name="loggingPath" class="it.bnl.fwk.jrfcore.logger.JRFCoreLoggingPathDefiner" scope="context" />
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%msg%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${loggingPath}/logs/application.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${loggingPath}/logs/archivio/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>30MB</totalSizeCap>
+			
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<!-- FRAMEWORK LOGS -->
+	<logger name="it.bnl.fwk.jrfcore" level="info" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<!-- APPLICATION LOG -->
+	<logger name="it.bnl.mon.a6.busin.diapason" level="info" additivity="true">
+		<appender-ref ref="FILE" />
+	</logger>	
+</configuration>

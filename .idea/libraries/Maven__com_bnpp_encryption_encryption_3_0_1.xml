@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.bnpp.encryption:encryption:3.0.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/bnpp/encryption/encryption/3.0.1/encryption-3.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/bnpp/encryption/encryption/3.0.1/encryption-3.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/bnpp/encryption/encryption/3.0.1/encryption-3.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

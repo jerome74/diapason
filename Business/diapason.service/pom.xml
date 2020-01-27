@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>it.bnl.fwk.jrfcore</groupId>
+		<artifactId>archetype-starter-parent</artifactId>
+		<version>1.2.12</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>it.bnl.mon.a6.busin</groupId>
+	<artifactId>diapason.service</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>${packaging.type}</packaging>
+	<name>Diapason 2.0 - Service project</name>
+	
+	<properties>
+		<start-class>it.bnl.mon.a6.busin.diapason.StartApplication</start-class>
+   	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>it.bnl.mon.a6.busin</groupId>
+			<artifactId>diapason.wsclient</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<!-- CONNECTOR REST DEPENDENCIES -->
+		<!-- <dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-connector-rest</artifactId>
+		</dependency> -->
+		
+		<!-- CONNECTOR JMS DEPENDENCIES -->
+		<!-- dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-connector-jms</artifactId>
+		</dependency-->
+		
+		<!-- CONNECTOR JAFKAAVRO DEPENDENCIES -->
+		<!-- dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-connector-kafkaavro</artifactId>
+		</dependency-->
+		
+		<!-- SOAP DEPENDENCIES -->
+		<!-- dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-connector-soap</artifactId>
+		</dependency-->
+		
+		<!-- DATABASE DEPENDENCIES -->
+		<!-- dependency>
+		    <groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-data</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		</dependency -->
+		
+		<!-- JRF4 SUPPORT DEPENDENCIES -->
+		<!-- dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-jrf4support</artifactId>
+		</dependency-->
+		
+		<!-- TEST DEPENDENCIES -->
+		<dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-core-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- KAFKA SERVER DEPENDENCIES -->
+		<!-- dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-kafka-server</artifactId>
+			<scope>test</scope>
+		</dependency-->
+		
+		<!-- JSM SERVER DEPENDENCIES -->
+		<!-- dependency>
+			<groupId>it.bnl.fwk.jrfcore</groupId>
+			<artifactId>jrfcore-jms-server</artifactId>
+			<scope>test</scope>
+		</dependency-->
+		
+	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>devops</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<packaging.type>war</packaging.type>
+			</properties>
+			
+			<build>
+				<resources> 
+					<resource> 
+						<directory>src/main/resources</directory> 
+						<excludes> 
+							<exclude>application-dev.properties</exclude>
+							<exclude>application-test.properties</exclude>
+							<exclude>schema.sql</exclude>
+							<exclude>data.sql</exclude>
+						</excludes> 
+					</resource> 
+				</resources>
+			</build>
+			
+			<dependencies>
+				<dependency>
+					<groupId>javax</groupId>
+					<artifactId>javaee-api</artifactId>
+				</dependency>
+				
+				<dependency>
+				    <groupId>javax.servlet</groupId>
+				    <artifactId>javax.servlet-api</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>bnl</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<packaging.type>war</packaging.type>
+			</properties>
+			
+			<build>
+				<resources> 
+					<resource> 
+						<directory>src/main/resources</directory> 
+						<excludes> 
+							<exclude>application-dev.properties</exclude>
+							<exclude>application-test.properties</exclude>
+							<exclude>schema.sql</exclude>
+							<exclude>data.sql</exclude>
+						</excludes> 
+					</resource> 
+				</resources>
+			</build>
+			
+			<dependencies>
+				<dependency>
+					<groupId>javax</groupId>
+					<artifactId>javaee-api</artifactId>
+				</dependency>
+				
+				<dependency>
+				    <groupId>javax.servlet</groupId>
+				    <artifactId>javax.servlet-api</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<packaging.type>jar</packaging.type>
+			</properties>
+		</profile>
+	</profiles>
+</project>
