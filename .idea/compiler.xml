@@ -14,7 +14,7 @@
     <bytecodeTargetLevel>
       <module name="diapason" target="1.5" />
       <module name="diapason.build" target="1.7" />
-      <module name="diapason.ear" target="1.5" />
+      <module name="diapason.ear" target="1.7" />
       <module name="diapason.service" target="1.7" />
       <module name="diapason.wsclient" target="1.7" />
     </bytecodeTargetLevel>
