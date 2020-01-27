@@ -1,1 +1,0 @@
-Copy here the Avro Schema (.hvsc) files to be processed by Avro Plugin.
